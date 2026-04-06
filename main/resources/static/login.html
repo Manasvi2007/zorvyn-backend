@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            margin-top: 150px;
+            font-family: Arial;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #22c55e;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>🔐 Crypto Dashboard Login</h1>
+
+<input id="user" placeholder="Username"><br>
+<input id="pass" type="password" placeholder="Password"><br>
+
+<button onclick="login()">Login</button>
+
+
+<script>
+
+    // Prevent going back to login if already logged in
+if (localStorage.getItem("loggedIn") === "true") {
+window.location.href = "index.html";
+}
+
+    // IMPORTANT: remove old login state (fix auto-login issue)
+
+    function login() {
+        const u = document.getElementById("user").value;
+        const p = document.getElementById("pass").value;
+
+        if (u === "admin" && p === "1234") {
+            localStorage.setItem("loggedIn", "true");
+
+            // NO slash → avoids routing issues
+            window.location.href = "index.html";
+
+        } else {
+            alert("Invalid login");
+        }
+    }
+
+</script>
+
+</body>
+</html>

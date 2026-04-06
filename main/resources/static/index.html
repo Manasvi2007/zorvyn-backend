@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Dashboard Pro</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- TradingView -->
+    <script src="https://s3.tradingview.com/tv.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <button onclick="toggleTheme()">🌙</button>
+
+    <div class="left">
+        <span class="menu" onclick="toggleMenu()">☰</span>
+        <span class="logo">📊 TradeX</span>
+    </div>
+
+    <div class="right">
+        <div class="profile">
+            <span id="username">Manasvi</span>
+            <img src="https://i.pravatar.cc/40">
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="sidebar">
+    <a onclick="goTo('dashboard')">Dashboard</a>
+    <a onclick="goTo('portfolio')">Portfolio</a>
+    <a onclick="goTo('trade')">Trade</a>
+    <a onclick="goTo('historySection')">History</a>
+</div>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+    <h2>Dashboard</h2>
+
+    <select onchange="changeCoin(this.value)">
+        <option value="BINANCE:BTCUSDT">BTC</option>
+        <option value="BINANCE:ETHUSDT">ETH</option>
+        <option value="BINANCE:SOLUSDT">SOL</option>
+    </select>
+
+    <h3>📊 Daily Summary</h3>
+    <div id="summaryBox" class="card">Loading...</div>
+
+    <h3>🤖 Recommendations</h3>
+    <div id="recommendBox" class="card">Loading...</div>
+
+    <!-- TradingView Chart -->
+    <div id="tradingview_chart" style="height:400px; margin-top:20px;"></div>
+
+    <!-- Price Cards -->
+    <div class="cards">
+        <div class="card"><h3>Bitcoin</h3><p id="btc"></p><p id="btcChange"></p></div>
+        <div class="card"><h3>Ethereum</h3><p id="eth"></p><p id="ethChange"></p></div>
+        <div class="card"><h3>Solana</h3><p id="sol"></p><p id="solChange"></p></div>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="chart-container" style="height:350px; width:100%;">
+        <canvas id="chart"></canvas>
+    </div>
+    <canvas id="lineChart"></canvas>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="page">
+        <h2>Portfolio</h2>
+
+        <div id="plContainer"></div>
+        <div id="balance"></div>
+        <div id="pl"></div>
+
+        <h3>Wallet</h3>
+        <input id="walletAmt" placeholder="Amount">
+        <button onclick="deposit()">Deposit</button>
+        <button onclick="withdraw()">Withdraw</button>
+
+        <p>Balance: ₹ <span id="walletBalance">0</span></p>
+    </section>
+
+    <!-- Pie Chart -->
+    <div class="chart-container">
+        <canvas id="portfolioChart"></canvas>
+    </div>
+
+    <h3>Wallet</h3>
+    <input id="walletAmt" placeholder="Amount">
+    <button onclick="deposit()">Deposit</button>
+    <button onclick="withdraw()">Withdraw</button>
+
+    <p>Balance: ₹ <span id="walletBalance">0</span></p>
+
+    <!-- Doughnut Chart -->
+    <div class="chart-container">
+        <canvas id="allocationChart"></canvas>
+    </div>
+</section>
+
+<!-- TRADE -->
+<section id="trade" class="page">
+    <h2>Trade Crypto</h2>
+
+    <select id="coinSelect">
+        <option value="btc">Bitcoin</option>
+        <option value="eth">Ethereum</option>
+        <option value="sol">Solana</option>
+    </select>
+
+    <input id="amount" placeholder="Amount ₹">
+
+    <button onclick="buy()">Buy</button>
+    <button onclick="sell()">Sell</button>
+</section>
+
+<!-- HISTORY -->
+<section id="historySection" class="page">
+    <h2>Transaction History</h2>
+
+    <div style="margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap;">
+        <input id="searchInput" placeholder="Search coin..." onkeyup="searchTrades()">
+
+        <select id="filterCoin">
+            <option value="">All Coins</option>
+            <option value="btc">Bitcoin</option>
+            <option value="eth">Ethereum</option>
+            <option value="sol">Solana</option>
+        </select>
+
+        <select id="filterType">
+            <option value="">All Types</option>
+            <option value="BUY">BUY</option>
+            <option value="SELL">SELL</option>
+        </select>
+
+        <input type="date" id="startDate">
+        <input type="date" id="endDate">
+
+        <button onclick="applyFilters()">Apply Filters</button>
+        <button onclick="loadHistory()">Reset</button>
+    </div>
+
+    <ul id="history"></ul>
+</section>
+
+<!-- APP JS (LOAD LAST 🔥) -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
